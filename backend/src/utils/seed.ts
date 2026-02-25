@@ -75,14 +75,29 @@ async function seed() {
 
   // Create permissions
   const permissionList = [
+    // Dashboard
+    { name: "dashboard:view", category: "dashboard" },
+
+    // Users
     { name: "users:create", category: "users" },
     { name: "users:read", category: "users" },
     { name: "users:update", category: "users" },
     { name: "users:delete", category: "users" },
+
+    // Roles
     { name: "roles:read", category: "roles" },
     { name: "roles:update", category: "roles" },
+
+    // Audit
     { name: "audit:read", category: "audit" },
+    { name: "logs:read", category: "audit" },
+
+    // Analytics
     { name: "analytics:read", category: "analytics" },
+    { name: "analytics:view", category: "analytics" },
+
+    // Settings
+    { name: "settings:read", category: "settings" },
   ];
 
   for (const permission of permissionList) {

@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Layout } from "./components/layout/Layout";
 import { ProtectedRoute } from "./components/common/ProtectedRoute";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import { AuthInitializer } from "./pages/auth/AuthInitializer";
 
 const Login = lazy(() =>
   import("./pages/auth/Login").then((m) => ({ default: m.Login })),
@@ -53,72 +54,74 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <VercelAnalytics />
       <BrowserRouter>
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+        <AuthInitializer>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Layout />
-                </ProtectedRoute>
-              }
-            >
               <Route
-                index
+                path="/"
                 element={
-                  <ProtectedRoute permission="dashboard:view">
-                    <Dashboard />
+                  <ProtectedRoute>
+                    <Layout />
                   </ProtectedRoute>
                 }
-              />
-              <Route
-                path="users"
-                element={
-                  <ProtectedRoute permission="users:read">
-                    <Users />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="roles"
-                element={
-                  <ProtectedRoute permission="roles:read">
-                    <Roles />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="audit"
-                element={
-                  <ProtectedRoute permission="logs:read">
-                    <AuditLogs />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="analytics"
-                element={
-                  <ProtectedRoute permission="analytics:view">
-                    <Analytics />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="settings"
-                element={
-                  <ProtectedRoute permission="settings:read">
-                    <Settings />
-                  </ProtectedRoute>
-                }
-              />
-            </Route>
+              >
+                <Route
+                  index
+                  element={
+                    <ProtectedRoute permission="dashboard:view">
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="users"
+                  element={
+                    <ProtectedRoute permission="users:read">
+                      <Users />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="roles"
+                  element={
+                    <ProtectedRoute permission="roles:read">
+                      <Roles />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="audit"
+                  element={
+                    <ProtectedRoute permission="logs:read">
+                      <AuditLogs />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="analytics"
+                  element={
+                    <ProtectedRoute permission="analytics:view">
+                      <Analytics />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="settings"
+                  element={
+                    <ProtectedRoute permission="settings:read">
+                      <Settings />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
 
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
+        </AuthInitializer>
       </BrowserRouter>
 
       <ToastContainer
