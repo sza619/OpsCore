@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Layout } from "./components/layout/Layout";
 import { ProtectedRoute } from "./components/common/ProtectedRoute";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 
 const Login = lazy(() =>
   import("./pages/auth/Login").then((m) => ({ default: m.Login })),
@@ -50,6 +51,7 @@ const LoadingFallback = () => (
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <VercelAnalytics />
       <BrowserRouter>
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
