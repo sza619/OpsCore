@@ -1,12 +1,14 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Layout } from "./components/layout/Layout";
 import { ProtectedRoute } from "./components/common/ProtectedRoute";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { AuthInitializer } from "./pages/auth/AuthInitializer";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = lazy(() =>
   import("./pages/auth/Login").then((m) => ({ default: m.Login })),
@@ -53,6 +55,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <VercelAnalytics />
+      <SpeedInsights />
       <BrowserRouter>
         <AuthInitializer>
           <Suspense fallback={<LoadingFallback />}>
