@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { UserPlus } from 'lucide-react';
-import { useAuth } from '../../hooks/useAuth';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { UserPlus } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { register, isRegisterLoading } = useAuth();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -17,23 +17,26 @@ export const Register = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
           <div className="flex items-center justify-center mb-8">
             <div className="bg-blue-600 p-3 rounded-xl">
               <UserPlus size={32} className="text-white" />
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-100 mb-2">
             Create Account
           </h1>
-          <p className="text-center text-gray-600 mb-8">
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
             Join OpsCore today
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-2"
+              >
                 Full Name
               </label>
               <input
@@ -48,7 +51,10 @@ export const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-2"
+              >
                 Email Address
               </label>
               <input
@@ -63,7 +69,10 @@ export const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-2"
+              >
                 Password
               </label>
               <input
@@ -83,14 +92,17 @@ export const Register = () => {
               disabled={isRegisterLoading}
               className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed transition-colors"
             >
-              {isRegisterLoading ? 'Creating account...' : 'Create Account'}
+              {isRegisterLoading ? "Creating account..." : "Create Account"}
             </button>
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
-              Already have an account?{' '}
-              <Link to="/login" className="text-blue-600 font-medium hover:text-blue-700">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="text-blue-600 font-medium hover:text-blue-700"
+              >
                 Sign in
               </Link>
             </p>

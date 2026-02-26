@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router-dom';
-import { Sidebar } from './Sidebar';
-import { Topbar } from './Topbar';
-import { ColdStartBanner } from '../common/ColdStartBanner';
-import { useColdStart } from '../../hooks/useColdStart';
+import { Outlet } from "react-router-dom";
+import { Sidebar } from "./Sidebar";
+import { Topbar } from "./Topbar";
+import { ColdStartBanner } from "../common/ColdStartBanner";
+import { useColdStart } from "../../hooks/useColdStart";
 
 export const Layout = () => {
   const { isColdStart } = useColdStart();
@@ -13,7 +13,7 @@ export const Layout = () => {
       <div className="flex-1 flex flex-col overflow-hidden">
         <ColdStartBanner show={isColdStart} />
         <Topbar />
-        <main className="flex-1 overflow-y-auto bg-gray-50 p-6">
+        <main className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900 p-6">
           <Outlet />
         </main>
       </div>
