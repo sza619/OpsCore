@@ -1,5 +1,5 @@
-import { memo } from 'react';
-import { NavLink } from 'react-router-dom';
+import { memo } from "react";
+import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
   Users,
@@ -8,29 +8,56 @@ import {
   BarChart3,
   Settings,
   ChevronLeft,
-} from 'lucide-react';
-import { useUIStore } from '../../stores/uiStore';
-import { usePermission } from '../../hooks/usePermission';
+} from "lucide-react";
+import { useUIStore } from "../../stores/uiStore";
+import { usePermission } from "../../hooks/usePermission";
 
 const navItems = [
-  { to: '/', icon: LayoutDashboard, label: 'Dashboard', permission: 'dashboard:view' },
-  { to: '/users', icon: Users, label: 'Users', permission: 'users:read' },
-  { to: '/roles', icon: Shield, label: 'Roles & Permissions', permission: 'roles:read' },
-  { to: '/audit', icon: FileText, label: 'Audit Logs', permission: 'logs:read' },
-  { to: '/analytics', icon: BarChart3, label: 'Analytics', permission: 'analytics:view' },
-  { to: '/settings', icon: Settings, label: 'Settings', permission: 'settings:read' },
+  {
+    to: "/",
+    icon: LayoutDashboard,
+    label: "Dashboard",
+    permission: "dashboard:view",
+  },
+  { to: "/users", icon: Users, label: "Users", permission: "users:read" },
+  {
+    to: "/roles",
+    icon: Shield,
+    label: "Roles & Permissions",
+    permission: "roles:read",
+  },
+  {
+    to: "/audit",
+    icon: FileText,
+    label: "Audit Logs",
+    permission: "logs:read",
+  },
+  {
+    to: "/analytics",
+    icon: BarChart3,
+    label: "Analytics",
+    permission: "analytics:view",
+  },
+  {
+    to: "/settings",
+    icon: Settings,
+    label: "Settings",
+    permission: "settings:read",
+  },
 ];
 
 export const Sidebar = memo(() => {
   const { sidebarOpen, toggleSidebar } = useUIStore();
   const { hasPermission } = usePermission();
 
-  const filteredNavItems = navItems.filter((item) => hasPermission(item.permission));
+  const filteredNavItems = navItems.filter((item) =>
+    hasPermission(item.permission),
+  );
 
   if (!sidebarOpen) return null;
 
   return (
-    <aside className="w-64 bg-gray-900 text-white min-h-screen flex flex-col">
+    <aside className="w-64 bg-gray-900 text-white min-h-screen flex flex-col dark:bg-gray-950">
       <div className="p-6 flex items-center justify-between border-b border-gray-800">
         <h1 className="text-2xl font-bold">OpsCore</h1>
         <button
@@ -49,8 +76,8 @@ export const Sidebar = memo(() => {
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 isActive
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-300 hover:bg-gray-800 hover:text-white"
               }`
             }
           >
@@ -68,4 +95,4 @@ export const Sidebar = memo(() => {
   );
 });
 
-Sidebar.displayName = 'Sidebar';
+Sidebar.displayName = "Sidebar";
